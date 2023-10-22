@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import PetsIcon from "@mui/icons-material/Pets";
+import { Link } from "react-router-dom";
 
 
 
@@ -64,7 +65,9 @@ function Header() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Link to={`/${page.toLowerCase()}`}>
                   <Typography textAlign="center">{page}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -90,13 +93,14 @@ function Header() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
+            <Link to={`/${page.toLowerCase()}`} key={page}>
               <Button
-                key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
               </Button>
+              </Link>
             ))}
           </Box>
 
