@@ -48,9 +48,21 @@ function Home() {
           
         </Box>
       </Box>
+      <Box>
+        <div style={{ marginLeft: '0px', marginTop:'0px' }}>
+          <p>este texto hay q ponerlo abajo de la imagen redonda</p>
+        </div>
+    </Box>
       <Box >
-
-        <img src="https://www.diariomayor.cl/temuco/images/mujer_abrazando_a_su_mascota.jpg" alt="Imagen" />
+      <img
+        src="https://www.diariomayor.cl/temuco/images/mujer_abrazando_a_su_mascota.jpg"
+        alt="Imagen"
+        style={{
+          width: '400px', 
+          height: '400px', 
+          borderRadius: '50%', 
+        }}
+      />
       
       </Box>
       <Box
