@@ -37,30 +37,28 @@ function Home() {
               fontWeight: 600,
               letterSpacing: ".3rem",
               textAlign: "center",
-              fontStyle:"bold",
-              marginRight:"20px"
+              fontStyle: "bold",
+              marginRight: "20px"
             }}
           >
             ADOPCIÓN DE <br />
             ANIMALES
           </Typography>
-          
-          
         </Box>
       </Box>
-      <Box >
-
-        <img src="https://www.diariomayor.cl/temuco/images/mujer_abrazando_a_su_mascota.jpg" alt="Imagen" />
-      
+      <Box>
+        <img
+          src="https://www.diariomayor.cl/temuco/images/mujer_abrazando_a_su_mascota.jpg"
+          alt="Imagen"
+          className="resizable-image"
+        />
       </Box>
       <Box
         padding={5}
         display="flex"
         flexDirection="column"
         gap={5}
-        
         backgroundColor="#13CE66"
-        
       >
         <Typography
           variant="h3"
@@ -70,8 +68,8 @@ function Home() {
             fontWeight: 700,
             letterSpacing: ".3rem",
             color: "white",
-            fontStyle:"bold",
-            marginLeft:"5px"
+            fontStyle: "bold",
+            marginLeft: "5px"
           }}
         >
           Animales en busca de hogar
@@ -81,5 +79,6 @@ function Home() {
     </PageContainer>
   );
 }
+
 
 export default Home;
