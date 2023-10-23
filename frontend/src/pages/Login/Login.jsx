@@ -83,7 +83,7 @@ return (
             margin="normal"
             required
             fullWidth
-            id="Rut"
+            id="rut"
             label="Ingresa tu Rut"
             name="rut"
             autoComplete="email"
