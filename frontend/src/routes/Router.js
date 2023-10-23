@@ -15,6 +15,7 @@ const Error = Loadable(lazy(() => import("../pages/Error/404")));
 /* ****Pages***** */
 const HomePage = Loadable(lazy(() => import("../pages/Home/Home")));
 const Login = Loadable(lazy(() => import("../pages/Login/Login")));
+const Nosotros = Loadable(lazy(() => import("../pages/Nosotros/Nosotros")));
 const Register = Loadable(lazy(() => import("../pages/Register/Register")));
 
 /* ****Routes***** */
@@ -26,6 +27,7 @@ const Router = [
     children: [
       { path: "", exact: true, element: <HomePage /> },
       { path: "Login", exact: true, element: <Login /> },
+      { path: "Nosotros", exact: true, element: <Nosotros /> },
       { path: "Register", exact: true, element: <Register /> },
       { path: "*", element: <Navigate to="/404" /> },
       { path: "404", element: <Error /> },

@@ -1,53 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
+import { Container, Grid, Card, CardMedia, CardContent, Typography } from '@mui/material';
 
-function ListarMascotas() {
-  const [listadoMascotas, setListadoMascotas] = useState([]);
-  const [banderaCarga, setBanderaCarga] = useState(true);
+import animal1 from '../images/animal1.jpg';
+import animal2 from '../images/animal2.jpg';
+import animal3 from '../images/animal3.jpg';
+import animal4 from '../images/animal4.jpg';
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        // Realiza nuevas solicitudes de datos y agrégalas al listado existente
-        const responses = await Promise.all([
-          fetch("https://api.thecatapi.com/v1/images/search?limit=5"), // Solicita 5 imágenes de gatos adicionales
-          fetch("https://api.thedogapi.com/v1/images/search?limit=5"), // Solicita 5 imágenes de perros adicionales
-        ]);
+const mascotas = [
+  { image: animal1, name: 'Animal 1' },
+  { image: animal2, name: 'Animal 2' },
+  { image: animal3, name: 'Animal 3' },
+  { image: animal4, name: 'Animal 4' },
+];
 
-        const data = await Promise.all(responses.map((response) => response.json()));
-        
-        // Combina los nuevos resultados con el listado existente
-        const nuevasMascotas = [...data[0], ...data[1], ...listadoMascotas];
-        setListadoMascotas(nuevasMascotas);
-
-        setBanderaCarga(false);
-      } catch (error) {
-        console.error("Hubo un error al obtener los datos:", error);
-      }
-    };
-
-    getData();
-  }, [listadoMascotas]); // Agrega listadoMascotas como una dependencia para que se actualice cuando cambie
-
+const ListarMascotas = () => {
   return (
-    <div>
-      {banderaCarga ? (
-        <p>Cargando...</p>
-      ) : (
-        <div>
-          {listadoMascotas.map((mascota, index) => (
-            <div key={index}>
-              <img
-                src={mascota.url}
-                alt={mascota.breeds ? mascota.breeds[0].name : "Mascota"}
-                style={{ maxWidth: "100%" }}
+    <Container>
+      <Grid container spacing={2}>
+        {mascotas.map((mascota, index) => (
+          <Grid item xs={6} key={index}>
+            <Card>
+              <CardMedia
+                component="img"
+                height="500"
+                image={mascota.image}
+                alt={mascota.name}
               />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+              <CardContent>
+                <Typography variant="h6">{mascota.name}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
-}
-
+};
 
 export default ListarMascotas;
+
+
+

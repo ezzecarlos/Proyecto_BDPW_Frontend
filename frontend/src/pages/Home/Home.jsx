@@ -2,7 +2,7 @@ import React from "react";
 import PageContainer from "../../components/container/PageContainer";
 import { Box, Typography, } from "@mui/material";
 import ListarMascotas from "./components/ListarMascotas";
-
+import Mapa from "./components/Mapa";
 
 function Home() {
   return (
@@ -47,11 +47,21 @@ function Home() {
         </Box>
       </Box>
       <Box>
-        <img
-          src="https://www.diariomayor.cl/temuco/images/mujer_abrazando_a_su_mascota.jpg"
-          alt="Imagen"
-          className="resizable-image"
-        />
+        <div style={{ marginLeft: '0px', marginTop:'0px' }}>
+          <p>este texto hay q ponerlo abajo de la imagen redonda</p>
+        </div>
+    </Box>
+      <Box >
+      <img
+        src="https://www.diariomayor.cl/temuco/images/mujer_abrazando_a_su_mascota.jpg"
+        alt="Imagen"
+        style={{
+          width: '400px', 
+          height: '400px', 
+          borderRadius: '50%', 
+        }}
+      />
+      
       </Box>
       <Box
         padding={5}
@@ -76,7 +86,14 @@ function Home() {
         </Typography>
       </Box>
       <ListarMascotas />
+      <Box style={{ marginTop: '40px' }}>
+        <Mapa />
+      </Box>
     </PageContainer>
+      
+    
+
+    
   );
 }
 
