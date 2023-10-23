@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
+import {link, useNavigate} from "react-router-dom"
 
 const Registrar = () => {
 
@@ -24,6 +25,7 @@ const Registrar = () => {
   })
 
   const [err,setError] = useState(null)
+  const navigate = useNavigate();
 
   const handleChange = e =>{
     setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
@@ -32,12 +34,10 @@ const Registrar = () => {
   const handleSubmit = async e =>{
     e.preventDefault()
     try{
-      const res = await axios.post("/auth/register", inputs)
-      console.log(res)
-      
+    await axios.post("/auth/register", inputs)
+    navigate("/login")
     } catch(err){
       setError(err.response.data);
-      //console.log(err)
     }
   }
   
