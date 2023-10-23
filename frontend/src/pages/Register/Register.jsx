@@ -23,6 +23,8 @@ const Registrar = () => {
     
   })
 
+  const [err,setError] = useState(null)
+
   const handleChange = e =>{
     setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
   }
@@ -34,7 +36,8 @@ const Registrar = () => {
       console.log(res)
       
     } catch(err){
-      console.log(err)
+      setError(err.response.data);
+      //console.log(err)
     }
   }
   
@@ -87,6 +90,7 @@ const Registrar = () => {
             >
               Registrar persona
             </Button>
+            {err &&<p>hola</p>}
             
           </Box>
         </Box>
