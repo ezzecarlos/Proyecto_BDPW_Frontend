@@ -2,10 +2,7 @@ import React from "react";
 import PageContainer from "../../components/container/PageContainer";
 import { Box, Typography, } from "@mui/material";
 import ListarMascotas from "./components/ListarMascotas";
-
-
-
-
+import Mapa from "./components/Mapa";
 
 function Home() {
   return (
@@ -93,7 +90,14 @@ function Home() {
         </Typography>
       </Box>
       <ListarMascotas />
+      <Box style={{ marginTop: '40px' }}>
+        <Mapa />
+      </Box>
     </PageContainer>
+      
+    
+
+    
   );
 }
 
