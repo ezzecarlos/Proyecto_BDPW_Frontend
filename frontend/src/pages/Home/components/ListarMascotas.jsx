@@ -1,49 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
+import { Container, Grid, Card, CardMedia, CardContent, Typography } from '@mui/material';
 
-function ListarMascotas() {
-  const [listadoMascotas, setListadoMascotas] = useState([]);
-  const [banderaCarga, setBanderaCarga] = useState(true);
+import animal1 from '../images/animal1.jpg';
+import animal2 from '../images/animal2.jpg';
+import animal3 from '../images/animal3.jpg';
+import animal4 from '../images/animal4.jpg';
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const responses = await Promise.all([
-          fetch("https://api.thecatapi.com/v1/images/search"),
-          fetch("https://api.thedogapi.com/v1/images/search"),
-        ]);
+const mascotas = [
+  { image: animal1, name: 'Animal 1' },
+  { image: animal2, name: 'Animal 2' },
+  { image: animal3, name: 'Animal 3' },
+  { image: animal4, name: 'Animal 4' },
+];
 
-        const data = await Promise.all(responses.map((response) => response.json()));
-        // Combina los resultados de gatos y perros en una sola lista
-        const mascotas = [...data[0], ...data[1]];
-        setListadoMascotas(mascotas);
-        setBanderaCarga(false);
-      } catch (error) {
-        console.error("Hubo un error al obtener los datos:", error);
-      }
-    };
-
-    getData();
-  }, []);
-
+const ListarMascotas = () => {
   return (
-    <div>
-      {banderaCarga ? (
-        <p>Cargando...</p>
-      ) : (
-        <div>
-          {listadoMascotas.map((mascota, index) => (
-            <div key={index}>
-              <img
-                src={mascota.url}
-                alt={mascota.breeds ? mascota.breeds[0].name : "Mascota"}
-                style={{ maxWidth: "100%" }}
+    <Container>
+      <Grid container spacing={2}>
+        {mascotas.map((mascota, index) => (
+          <Grid item xs={6} key={index}>
+            <Card>
+              <CardMedia
+                component="img"
+                height="500"
+                image={mascota.image}
+                alt={mascota.name}
               />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+              <CardContent>
+                <Typography variant="h6">{mascota.name}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
-}
+};
 
 export default ListarMascotas;
+
+
+
