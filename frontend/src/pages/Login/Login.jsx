@@ -88,6 +88,7 @@ return (
             name="rut"
             autoComplete="email"
             autoFocus
+            onChange={handleChange}
           />
           <TextField
             margin="normal"
@@ -98,6 +99,7 @@ return (
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
