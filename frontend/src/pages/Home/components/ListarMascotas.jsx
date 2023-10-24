@@ -16,10 +16,10 @@ const mascotas = [
 const ListarMascotas = () => {
   return (
     <Container>
-      <Grid container spacing={2}>
+      <Grid container spacing={10}>
         {mascotas.map((mascota, index) => (
           <Grid item xs={6} key={index}>
-            <Card>
+            <Card style={{ marginTop: '100px',width:'500px' }}>
               <CardMedia
                 component="img"
                 height="500"

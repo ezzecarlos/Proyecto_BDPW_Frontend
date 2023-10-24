@@ -46,12 +46,7 @@ function Home() {
           </Typography>
         </Box>
       </Box>
-      <Box>
-        <div style={{ marginLeft: '0px', marginTop:'0px' }}>
-          <p>este texto hay q ponerlo abajo de la imagen redonda</p>
-        </div>
-    </Box>
-      <Box >
+    <Box display="flex" alignItems="center"> {/* Set to flex and align items to the center */}
       <img
         src="https://www.diariomayor.cl/temuco/images/mujer_abrazando_a_su_mascota.jpg"
         alt="Imagen"
@@ -59,10 +54,20 @@ function Home() {
           width: '400px', 
           height: '400px', 
           borderRadius: '50%', 
+          marginRight: '20px'  // Optional: Add some spacing between the image and the text
         }}
       />
-      
-      </Box>
+      <div>
+        <p>¡Bienvenido a Nuestro refugio de animales!</p>
+        <br />
+        <p>En nuestro refugio de animales, estamos comprometidos con la mision de conectar
+          a los animales necesitados con con hogares amorosos. Nuestro equipo de apasionados 
+          amantes de los animales trabaja incansablemente para brindar una segunda oportunidad
+          a esos animales que están buscando un lugar para refugiarse.
+        </p>
+      </div>
+          </Box>
+
       <Box
         padding={5}
         display="flex"
@@ -85,11 +90,13 @@ function Home() {
           Animales en busca de hogar
         </Typography>
       </Box>
-      <ListarMascotas />
-      <Box style={{ marginTop: '40px' }}>
-        <Mapa />
-      </Box>
-    </PageContainer>
+
+<ListarMascotas />
+<Box style={{ marginTop: '40px' }}>
+  <Mapa />
+</Box>
+</PageContainer>
+
       
     
 
