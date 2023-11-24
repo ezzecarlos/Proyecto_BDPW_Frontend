@@ -1,12 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import PageContainer from "../../components/container/PageContainer";
-import { Box, Typography, } from "@mui/material";
+import { Box, Typography, Card, CardContent, CardMedia, Button,} from "@mui/material";
 import ListarMascotas from "./components/ListarMascotas";
 import Mapa from "./components/Mapa";
+import gato from './images/gato.png';
+import perro from './images/perro.png';
+import { Link } from 'react-router-dom';
+
+
+
 
 function Home() {
+  const imageStyle = {
+    width: '250px', // Cambia este valor para ajustar el ancho de las imágenes
+    height: '210px', // Para mantener la proporción al cambiar el ancho
+  
+  };
+  const [hoverPerro, setHoverPerro] = useState(false);
+  const [hoverGato, setHoverGato] = useState(false);
   return (
-    <PageContainer title="Pagina inicio" description="anashei">
+    
+    <PageContainer title="Pagina inicio" description="">
       <Box
         sx={{
           display: "flex",
@@ -46,7 +60,7 @@ function Home() {
           </Typography>
         </Box>
       </Box>
-    <Box display="flex" alignItems="center"> {/* Set to flex and align items to the center */}
+    <Box display="flex" alignItems="center"> {}
       <img
         src="https://www.diariomayor.cl/temuco/images/mujer_abrazando_a_su_mascota.jpg"
         alt="Imagen"
@@ -54,7 +68,7 @@ function Home() {
           width: '400px', 
           height: '400px', 
           borderRadius: '50%', 
-          marginRight: '20px'  // Optional: Add some spacing between the image and the text
+          marginRight: '20px'  
         }}
       />
       <div>
@@ -90,8 +104,41 @@ function Home() {
           Animales en busca de hogar
         </Typography>
       </Box>
+  <Box style={{ display: 'flex', marginLeft:"290px", marginTop:'30px' }}>
+    <Link to="Error" style={{ textDecoration: 'none', width:'300px', marginRight: '10px', display: 'inline-block' }}>
+      <Card style={{ width: '100%', marginTop: '15px',marginRight:'10px', transition: 'transform 0.3s ease-in-out', 
+        transform: hoverPerro ? 'scale(1.05)' : 'scale(1)',}} 
+        onMouseEnter={() => setHoverPerro(true)}
+        onMouseLeave={() => setHoverPerro(false)}>
+          <CardContent>
+            <CardMedia
+              component="img"
+              image={perro}
+              alt="Perro"
+              style={imageStyle}
+            />
+          </CardContent>
+        </Card>
+        </Link>
+      <Link to="Login" style={{ textDecoration: 'none',width:'300px', display: 'inline-block', }}> 
+        <Card style={{ width: '100%', marginTop: '15px', marginLeft: '100px',  transition: 'transform 0.3s ease-in-out', 
+        transform: hoverGato ? 'scale(1.05)' : 'scale(1)'}}
+        onMouseEnter={() => setHoverGato(true)}
+        onMouseLeave={() => setHoverGato(false)}
+        >
+          <CardContent>   
+            <CardMedia
+              component="img"
+              image={gato}
+              alt="Gato"
+              style={imageStyle}
+            />
+          </CardContent>
+        </Card>
+        </Link>
+        
+  </Box>
 
-<ListarMascotas />
 <Box style={{ marginTop: '40px' }}>
   <Mapa />
 </Box>

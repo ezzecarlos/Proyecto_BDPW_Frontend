@@ -18,6 +18,7 @@ const Login = Loadable(lazy(() => import("../pages/Login/Login")));
 const Nosotros = Loadable(lazy(() => import("../pages/Nosotros/Nosotros")));
 const Register = Loadable(lazy(() => import("../pages/Register/Register")));
 
+const Requisitos = Loadable(lazy(() => import("../pages/Requisitos/Requisitos")));
 /* ****Routes***** */
 
 const Router = [
@@ -29,6 +30,7 @@ const Router = [
       { path: "Login", exact: true, element: <Login /> },
       { path: "Nosotros", exact: true, element: <Nosotros /> },
       { path: "Register", exact: true, element: <Register /> },
+      { path: "Requisitos", exact: true, element: <Requisitos /> },
       { path: "*", element: <Navigate to="/404" /> },
       { path: "404", element: <Error /> },
     ],

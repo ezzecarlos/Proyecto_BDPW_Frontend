@@ -44,7 +44,7 @@ const Registrar = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-    {/* Background Image */}
+    {/* Imagen de fondo */}
     <div style={{
       position: 'fixed',
       top: 0,
@@ -57,13 +57,13 @@ const Registrar = () => {
       zIndex: -1,
     }}></div>
 
-    {/* Registration Form Container */}
+    {/* Contenedor formulario registro */}
     <Container component="main" maxWidth="xs" 
       style={{ 
         marginTop: '40px',
-        backgroundColor: 'rgba(255, 255, 255, 0.5)', // White background with 90% opacity
-        borderRadius: '8px', // Rounded corners
-        padding: '20px', // Padding inside the box
+        backgroundColor: 'rgba(255, 255, 255, 0.5)', 
+        borderRadius: '8px', 
+        padding: '20px', 
       }}
     >
       <CssBaseline />
