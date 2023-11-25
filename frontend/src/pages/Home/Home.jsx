@@ -105,7 +105,7 @@ function Home() {
         </Typography>
       </Box>
   <Box style={{ display: 'flex', marginLeft:"290px", marginTop:'30px' }}>
-    <Link to="Error" style={{ textDecoration: 'none', width:'300px', marginRight: '10px', display: 'inline-block' }}>
+    <Link to="Perros" style={{ textDecoration: 'none', width:'300px', marginRight: '10px', display: 'inline-block' }}>
       <Card style={{ width: '100%', marginTop: '15px',marginRight:'10px', transition: 'transform 0.3s ease-in-out', 
         transform: hoverPerro ? 'scale(1.05)' : 'scale(1)',}} 
         onMouseEnter={() => setHoverPerro(true)}
