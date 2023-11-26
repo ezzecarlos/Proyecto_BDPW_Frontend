@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import PageContainer from "../../components/container/PageContainer";
-import { Box, Typography, Card, CardContent, CardMedia, Button,} from "@mui/material";
-import ListarMascotas from "./components/ListarMascotas";
+import { Box, Typography, Card, CardContent, CardMedia,} from "@mui/material";
 import Mapa from "./components/Mapa";
 import gato from './images/gato.png';
 import perro from './images/perro.png';
@@ -120,7 +119,7 @@ function Home() {
           </CardContent>
         </Card>
         </Link>
-      <Link to="Login" style={{ textDecoration: 'none',width:'300px', display: 'inline-block', }}> 
+      <Link to="Gatos" style={{ textDecoration: 'none',width:'300px', display: 'inline-block', }}> 
         <Card style={{ width: '100%', marginTop: '15px', marginLeft: '100px',  transition: 'transform 0.3s ease-in-out', 
         transform: hoverGato ? 'scale(1.05)' : 'scale(1)'}}
         onMouseEnter={() => setHoverGato(true)}

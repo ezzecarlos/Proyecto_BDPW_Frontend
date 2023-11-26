@@ -14,7 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import React from "react";
 import {useState} from "react";
-import { link, useNavigate } from "react-router-dom";
+import {useNavigate, } from "react-router-dom";
 import axios from "axios";
 
 
@@ -27,10 +27,11 @@ const Login = () =>{
   const [inputs, setInputs] = useState({
   username: "",
   password: "",
+  correo_electronico: "",
   
 })
 
-  const [err,setError] = useState(null)
+  const [setError] = useState(null)
   const navigate = useNavigate();
 
   const handleChange = e =>{
@@ -46,6 +47,8 @@ const Login = () =>{
       setError(err.response.data);
     }
  };
+
+ 
 //     return ( 
 //       <div classname= 'auth'>
 //         <h1>Login</h1>
@@ -118,6 +121,17 @@ return (
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Correo Electrónico"
+            type="email"
+            id="email"
+            autoComplete="email"
             onChange={handleChange}
           />
           <FormControlLabel

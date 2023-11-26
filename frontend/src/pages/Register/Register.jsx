@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-import {Link, useNavigate} from "react-router-dom"
+import {useNavigate,} from "react-router-dom"
 
 const Registrar = () => {
 
@@ -21,15 +21,16 @@ const Registrar = () => {
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
+    correo_electronico:"",
     
   })
 
   const [err,setError] = useState(null)
   const navigate = useNavigate();
 
-  const handleChange = e =>{
-    setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
-  }
+  const handleChange = e => {
+    setInputs(prev => ({...prev, [e.target.name]: e.target.value}))
+}
 
   const handleSubmit = async e =>{
     e.preventDefault()
@@ -102,6 +103,18 @@ const Registrar = () => {
             autoComplete="current-password"
             onChange={handleChange}
           />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            type="email" // Usar type="email" para validar el formato de correo electrónico
+            name="email" // Nombre del campo para el correo electrónico
+            label="Correo Electrónico" // Etiqueta del campo
+            autoComplete="email" // Autocompletar para correo electrónico
+            onChange={handleChange} // Manejar cambios en el formulario
+          />
+
           
           <Button
             type="submit"
