@@ -4,9 +4,13 @@ import { Box, Typography, } from "@mui/material";
 import ListarMascotas from "./components/ListarMascotas";
 import Mapa from "./components/Mapa";
 
+// Definición del componente funcional Home
 function Home() {
+  // Renderización del componente
   return (
+    // Uso del componente PageContainer con título y descripción
     <PageContainer title="Pagina inicio" description="anashei">
+      {/* Sección de la imagen de fondo y texto centrado */}
       <Box
         sx={{
           display: "flex",
@@ -21,6 +25,7 @@ function Home() {
         }}
         minHeight={600}
       >
+        {/* Contenedor de texto centrado sobre la imagen de fondo */}
         <Box
           display="flex"
           flexDirection="column"
@@ -28,6 +33,7 @@ function Home() {
           justifyContent={"center"}
           alignItems="center"
         >
+          {/* Título grande y estilizado */}
           <Typography
             variant="h1"
             component="h1"
@@ -46,11 +52,13 @@ function Home() {
           </Typography>
         </Box>
       </Box>
+      {/* Sección de texto debajo de la imagen redonda */}
       <Box>
         <div style={{ marginLeft: '0px', marginTop:'0px' }}>
           <p>este texto hay q ponerlo abajo de la imagen redonda</p>
         </div>
     </Box>
+    {/* Imagen redonda */}
       <Box >
       <img
         src="https://www.diariomayor.cl/temuco/images/mujer_abrazando_a_su_mascota.jpg"
@@ -63,6 +71,7 @@ function Home() {
       />
       
       </Box>
+      {/* Sección de fondo verde con título */}
       <Box
         padding={5}
         display="flex"
@@ -70,6 +79,7 @@ function Home() {
         gap={5}
         backgroundColor="#13CE66"
       >
+        {/* Título de la sección de animales en busca de hogar */}
         <Typography
           variant="h3"
           component="h2"
@@ -85,7 +95,9 @@ function Home() {
           Animales en busca de hogar
         </Typography>
       </Box>
+      {/* Componente que lista las mascotas disponibles para adopción */}
       <ListarMascotas />
+      {/* Sección del mapa */}
       <Box style={{ marginTop: '40px' }}>
         <Mapa />
       </Box>
@@ -97,5 +109,5 @@ function Home() {
   );
 }
 
-
+// Exportar el componente Home como componente por defecto
 export default Home;

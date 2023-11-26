@@ -13,20 +13,30 @@ const mascotas = [
   { image: animal4, name: 'Animal 4' },
 ];
 
+// Definición de un componente funcional ListarMascotas utilizando Arrow Function
 const ListarMascotas = () => {
+  // Renderización del componente
   return (
+    // Contenedor principal de Material-UI
     <Container>
+      {/* Contenedor de cuadrícula de Material-UI con espaciado entre elementos */}
       <Grid container spacing={2}>
+        {/* Mapeo sobre el array de mascotas para crear tarjetas individuales */}
         {mascotas.map((mascota, index) => (
+           // Cada elemento de la cuadrícula ocupa 6 columnas en dispositivos extra pequeños (xs)
           <Grid item xs={6} key={index}>
+            {/* Tarjeta de Material-UI */}
             <Card>
+              {/* Componente de medios de Material-UI, en este caso, una imagen */}
               <CardMedia
                 component="img"
                 height="500"
                 image={mascota.image}
                 alt={mascota.name}
               />
+              {/* Contenido de la tarjeta */}
               <CardContent>
+                {/* Título de la mascota */}
                 <Typography variant="h6">{mascota.name}</Typography>
               </CardContent>
             </Card>
@@ -37,6 +47,7 @@ const ListarMascotas = () => {
   );
 };
 
+// Exportar el componente ListarMascotas como componente por defecto
 export default ListarMascotas;
 
 
