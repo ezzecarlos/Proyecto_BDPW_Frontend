@@ -17,7 +17,12 @@ const HomePage = Loadable(lazy(() => import("../pages/Home/Home")));
 const Login = Loadable(lazy(() => import("../pages/Login/Login")));
 const Nosotros = Loadable(lazy(() => import("../pages/Nosotros/Nosotros")));
 const Register = Loadable(lazy(() => import("../pages/Register/Register")));
+const Perros = Loadable(lazy(() => import("../pages/Perros/Perros")));
+const Gatos = Loadable(lazy(() => import("../pages/Gatos/Gatos")));
+const MascotaDetalle = Loadable(lazy(() => import("../pages/MascotaDetalle/MascotaDetalle")));
 
+
+const Requisitos = Loadable(lazy(() => import("../pages/Requisitos/Requisitos")));
 /* ****Routes***** */
 
 const Router = [
@@ -29,6 +34,10 @@ const Router = [
       { path: "Login", exact: true, element: <Login /> },
       { path: "Nosotros", exact: true, element: <Nosotros /> },
       { path: "Register", exact: true, element: <Register /> },
+      { path: "Requisitos", exact: true, element: <Requisitos /> },
+      { path: "Perros", exact: true, element: <Perros /> },
+      { path: "Gatos", exact: true, element: <Gatos /> },
+      { path: "mascota/:mascotaName", exact: true, element: <MascotaDetalle /> },
       { path: "*", element: <Navigate to="/404" /> },
       { path: "404", element: <Error /> },
     ],

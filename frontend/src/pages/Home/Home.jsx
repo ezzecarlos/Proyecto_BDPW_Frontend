@@ -1,16 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import PageContainer from "../../components/container/PageContainer";
-import { Box, Typography, } from "@mui/material";
-import ListarMascotas from "./components/ListarMascotas";
-import Mapa from "./components/Mapa";
+import { Box, Typography, Card, CardContent, CardMedia,} from "@mui/material";
+
+import gato from './images/gato.png';
+import perro from './images/perro.png';
+import { Link } from 'react-router-dom';
+
+
+
 
 // Definición del componente funcional Home
 function Home() {
-  // Renderización del componente
+  const imageStyle = {
+    width: '250px', // Cambia este valor para ajustar el ancho de las imágenes
+    height: '210px', // Para mantener la proporción al cambiar el ancho
+  
+  };
+  const [hoverPerro, setHoverPerro] = useState(false);
+  const [hoverGato, setHoverGato] = useState(false);
   return (
-    // Uso del componente PageContainer con título y descripción
-    <PageContainer title="Pagina inicio" description="anashei">
-      {/* Sección de la imagen de fondo y texto centrado */}
+    
+    <PageContainer title="Pagina inicio" description="">
       <Box
         sx={{
           display: "flex",
@@ -52,14 +62,7 @@ function Home() {
           </Typography>
         </Box>
       </Box>
-      {/* Sección de texto debajo de la imagen redonda */}
-      <Box>
-        <div style={{ marginLeft: '0px', marginTop:'0px' }}>
-          <p>este texto hay q ponerlo abajo de la imagen redonda</p>
-        </div>
-    </Box>
-    {/* Imagen redonda */}
-      <Box >
+    <Box display="flex" alignItems="center"> {}
       <img
         src="https://www.diariomayor.cl/temuco/images/mujer_abrazando_a_su_mascota.jpg"
         alt="Imagen"
@@ -67,11 +70,20 @@ function Home() {
           width: '400px', 
           height: '400px', 
           borderRadius: '50%', 
+          marginRight: '20px'  
         }}
       />
-      
-      </Box>
-      {/* Sección de fondo verde con título */}
+      <div>
+        <p>¡Bienvenido a Nuestro refugio de animales!</p>
+        <br />
+        <p>En nuestro refugio de animales, estamos comprometidos con la mision de conectar
+          a los animales necesitados con con hogares amorosos. Nuestro equipo de apasionados 
+          amantes de los animales trabaja incansablemente para brindar una segunda oportunidad
+          a esos animales que están buscando un lugar para refugiarse.
+        </p>
+      </div>
+          </Box>
+
       <Box
         padding={5}
         display="flex"
@@ -95,13 +107,44 @@ function Home() {
           Animales en busca de hogar
         </Typography>
       </Box>
-      {/* Componente que lista las mascotas disponibles para adopción */}
-      <ListarMascotas />
-      {/* Sección del mapa */}
-      <Box style={{ marginTop: '40px' }}>
-        <Mapa />
-      </Box>
-    </PageContainer>
+  <Box style={{ display: 'flex', marginLeft:"290px", marginTop:'30px' }}>
+    <Link to="Perros" style={{ textDecoration: 'none', width:'300px', marginRight: '10px', display: 'inline-block' }}>
+      <Card style={{ width: '100%', marginTop: '15px',marginRight:'10px', transition: 'transform 0.3s ease-in-out', 
+        transform: hoverPerro ? 'scale(1.05)' : 'scale(1)',}} 
+        onMouseEnter={() => setHoverPerro(true)}
+        onMouseLeave={() => setHoverPerro(false)}>
+          <CardContent>
+            <CardMedia
+              component="img"
+              image={perro}
+              alt="Perro"
+              style={imageStyle}
+            />
+          </CardContent>
+        </Card>
+        </Link>
+      <Link to="Gatos" style={{ textDecoration: 'none',width:'300px', display: 'inline-block', }}> 
+        <Card style={{ width: '100%', marginTop: '15px', marginLeft: '100px',  transition: 'transform 0.3s ease-in-out', 
+        transform: hoverGato ? 'scale(1.05)' : 'scale(1)'}}
+        onMouseEnter={() => setHoverGato(true)}
+        onMouseLeave={() => setHoverGato(false)}
+        >
+          <CardContent>   
+            <CardMedia
+              component="img"
+              image={gato}
+              alt="Gato"
+              style={imageStyle}
+            />
+          </CardContent>
+        </Card>
+        </Link>
+        
+  </Box>
+
+
+</PageContainer>
+
       
     
 

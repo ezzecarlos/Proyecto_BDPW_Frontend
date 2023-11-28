@@ -22,6 +22,7 @@ const Header = () => {
                 <Button color="inherit" component={Link} to="/Register">Registrarse</Button>
                 {/* Botón de navegación para el enlace a la página Login */}
                 <Button color="inherit" component={Link} to="/Login">Iniciar sesión</Button>
+             
             </Toolbar>
         </AppBar>
     );

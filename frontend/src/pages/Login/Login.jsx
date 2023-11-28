@@ -3,7 +3,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from "react";
 import {useState} from "react";
-import { link, useNavigate } from "react-router-dom";
+import {useNavigate, } from "react-router-dom";
 import axios from "axios";
 
 
@@ -15,11 +15,11 @@ const Login = () =>{
   const [inputs, setInputs] = useState({
   username: "",
   password: "",
+  correo_electronico: "",
   
 })
- // Estado para gestionar errores durante la solicitud
-  const [err,setError] = useState(null)
-  // Hook de navegación de React Router
+
+  const [setError] = useState(null)
   const navigate = useNavigate();
 // Función que maneja los cambios en los campos de entrada del formulario
   const handleChange = e =>{
@@ -38,11 +38,32 @@ const Login = () =>{
       setError(err.response.data);
     }
  };
-// Renderización del componente
+
+ 
+
 return (
   // Proveer el tema por defecto para los componentes de Material-UI
   <ThemeProvider theme={defaultTheme}>
-    <Container component="main" maxWidth="xs">
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      height: '100%',
+      width: '100%',
+      backgroundImage: 'url(https://www.spmas.es/wp-content/uploads/2023/06/Clinica-veterinaria.jpg)', 
+      backgroundSize: 'cover',
+      opacity: 0.7,
+      zIndex: -1,
+    }}></div>
+    
+    <Container component="main" maxWidth="xs" 
+      style={{ 
+        marginTop: '10px',
+        backgroundColor: 'rgba(255, 255, 255, 0.7)', 
+        borderRadius: '8px', 
+        padding: '20px', 
+      }}
+    >
       <CssBaseline />
       {/* Contenedor principal de la página */}
       <Box
@@ -87,7 +108,17 @@ return (
             autoComplete="current-password"
             onChange={handleChange}
           />
-          {/* Casilla de verificación "Recuérdame" */}
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Correo Electrónico"
+            type="email"
+            id="email"
+            autoComplete="email"
+            onChange={handleChange}
+          />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Recuerdame"

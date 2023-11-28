@@ -1,38 +1,76 @@
-import React from 'react';
-import { Container, Grid, Card, CardMedia, CardContent, Typography } from '@mui/material';
-
-import animal1 from '../images/animal1.jpg';
-import animal2 from '../images/animal2.jpg';
-import animal3 from '../images/animal3.jpg';
-import animal4 from '../images/animal4.jpg';
-
-const mascotas = [
-  { image: animal1, name: 'Animal 1' },
-  { image: animal2, name: 'Animal 2' },
-  { image: animal3, name: 'Animal 3' },
-  { image: animal4, name: 'Animal 4' },
-];
+import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Container, Grid, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 
 // Definición de un componente funcional ListarMascotas utilizando Arrow Function
 const ListarMascotas = () => {
-  // Renderización del componente
+  const [mascotas, setMascotas] = useState([]);
+  const [paginaActual, setPaginaActual] = useState(1);
+  const tarjetasPorPagina = 6;
+  const totalMascotas = 10; // Número total de mascotas para cargar
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const obtenerMascotasConcurrentes = async () => {
+      try {
+        const promesas = Array.from({ length: totalMascotas }, () => 
+          fetch('https://dog.ceo/api/breeds/image/random').then(r => r.json())
+        );
+        const resultados = await Promise.all(promesas);
+        const nuevasMascotas = resultados.map((data, index) => ({
+          image: data.message,
+          name: `Animal ${index + 1}`
+        }));
+        setMascotas(nuevasMascotas);
+      } catch (error) {
+        console.error('Error al obtener datos de la API:', error);
+      }
+    };
+  
+    obtenerMascotasConcurrentes();
+  }, []);
+
+  const totalPaginas = Math.ceil(mascotas.length / tarjetasPorPagina);
+
+  const mascotasActuales = useMemo(() => {
+    const indiceFinal = paginaActual * tarjetasPorPagina;
+    const indiceInicial = indiceFinal - tarjetasPorPagina;
+    return mascotas.slice(indiceInicial, indiceFinal);
+  }, [mascotas, paginaActual, tarjetasPorPagina]);
+
+  const handleCardClick = (mascotaName) => {
+    navigate(`/mascota/${mascotaName}`);
+  };
+
+  const cambiarPagina = (numeroPagina) => {
+    setPaginaActual(numeroPagina);
+  };
+
+  const botonesPaginacion = useMemo(() => (
+    Array.from({ length: totalPaginas }, (item, index) => (
+      <Button key={index} onClick={() => cambiarPagina(index + 1)}>
+        {index + 1}
+      </Button>
+    ))
+  ), [totalPaginas]);
+
   return (
     // Contenedor principal de Material-UI
     <Container>
-      {/* Contenedor de cuadrícula de Material-UI con espaciado entre elementos */}
-      <Grid container spacing={2}>
-        {/* Mapeo sobre el array de mascotas para crear tarjetas individuales */}
-        {mascotas.map((mascota, index) => (
-           // Cada elemento de la cuadrícula ocupa 6 columnas en dispositivos extra pequeños (xs)
+      <Grid container spacing={10}>
+        {mascotasActuales.map((mascota, index) => (
           <Grid item xs={6} key={index}>
-            {/* Tarjeta de Material-UI */}
-            <Card>
-              {/* Componente de medios de Material-UI, en este caso, una imagen */}
+            <Card 
+              style={{ marginTop: '100px', width: '500px' }} 
+              onClick={() => handleCardClick(mascota.name)}
+            >
               <CardMedia
                 component="img"
                 height="500"
                 image={mascota.image}
                 alt={mascota.name}
+                loading="lazy" // Habilita carga perezosa
               />
               {/* Contenido de la tarjeta */}
               <CardContent>
@@ -43,12 +81,12 @@ const ListarMascotas = () => {
           </Grid>
         ))}
       </Grid>
+      <div style={{ marginTop: '20px' }}>
+        {botonesPaginacion}
+      </div>
     </Container>
   );
 };
 
 // Exportar el componente ListarMascotas como componente por defecto
 export default ListarMascotas;
-
-
-
