@@ -1,55 +1,88 @@
-import React, { useState, useEffect,useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Grid, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
+import axios from 'axios';
 
 const ListarGatos = () => {
   const [mascotas, setMascotas] = useState([]);
+  const [nombresAnimales, setNombresAnimales] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);
   const tarjetasPorPagina = 6;
-  const totalMascotas = 10; // Número total de mascotas para cargar
+  const [totalMascotas, setTotalMascotas] = useState(null);
 
   const navigate = useNavigate();
 
+  // Obtiene los nombres de los animales de tu API
+  const obtenerNombresAnimales = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8800/api/nombre`);
+      setNombresAnimales(response.data);
+    } catch (error) {
+      console.error('Error al obtener nombres de animales:', error);
+    }
+  };
+
+  // Cuenta el total de mascotas (gatos) en tu API
+  const contarMascotas = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8800/api/count`);
+      setTotalMascotas(response.data.total);
+    } catch (error) {
+      console.error('Error al obtener el total de mascotas:', error);
+    }
+  };
+
+  // Se llama al cargar el componente
   useEffect(() => {
+    obtenerNombresAnimales();
+    contarMascotas();
+  }, []);
+
+  // Obtiene las imágenes de los gatos de TheCatAPI
+  useEffect(() => {
+    if (totalMascotas === null || nombresAnimales.length === 0) return;
+
     const obtenerMascotasDeTheCatAPI = async () => {
       try {
-        // Obtener una lista de razas de perros
-        const respuestaRazas = await fetch('https://api.thecatapi.com/v1/breeds');
-        const razas = await respuestaRazas.json();
-
-        // Obtener imágenes para un subconjunto de razas
-        const promesas = razas.slice(0, totalMascotas).map(raza => 
-          fetch(`https://api.thecatapi.com/v1/images/search?breed_id=${raza.id}`).then(r => r.json())
+        const promesas = Array.from({ length: totalMascotas }, () => 
+          fetch(`https://api.thecatapi.com/v1/images/search`).then(r => r.json())
         );
         const resultados = await Promise.all(promesas);
         const nuevasMascotas = resultados.map((data, index) => ({
-          image: data[0].url, // Asumiendo que cada respuesta tiene al menos una imagen
-          name: razas[index].name // Nombre de la raza
+          image: data[0].url,
+          nombre: nombresAnimales[index] || `Mascota ${index}`,
+          id: index
         }));
         setMascotas(nuevasMascotas);
       } catch (error) {
-        console.error('Error al obtener datos de TheDogAPI:', error);
+        console.error('Error al obtener datos de TheCatAPI:', error);
       }
     };
-  
+
     obtenerMascotasDeTheCatAPI();
-  }, []);
+  }, [totalMascotas, nombresAnimales]);
+
+  // Calcula el total de páginas para la paginación
   const totalPaginas = Math.ceil(mascotas.length / tarjetasPorPagina);
 
+  // Obtiene las mascotas para la página actual
   const mascotasActuales = useMemo(() => {
     const indiceFinal = paginaActual * tarjetasPorPagina;
     const indiceInicial = indiceFinal - tarjetasPorPagina;
     return mascotas.slice(indiceInicial, indiceFinal);
   }, [mascotas, paginaActual, tarjetasPorPagina]);
 
-  const handleCardClick = (mascotaName) => {
-    navigate(`/mascota/${mascotaName}`);
+  // Maneja el clic en una tarjeta de mascota
+  const handleCardClick = (mascotaNombre) => {
+    navigate(`/mascota/${encodeURIComponent(mascotaNombre)}`);
   };
 
+  // Cambia la página actual
   const cambiarPagina = (numeroPagina) => {
     setPaginaActual(numeroPagina);
   };
 
+  // Crea los botones de paginación
   const botonesPaginacion = useMemo(() => (
     Array.from({ length: totalPaginas }, (item, index) => (
       <Button key={index} onClick={() => cambiarPagina(index + 1)}>
@@ -65,17 +98,17 @@ const ListarGatos = () => {
           <Grid item xs={6} key={index}>
             <Card 
               style={{ marginTop: '100px', width: '500px' }} 
-              onClick={() => handleCardClick(mascota.name)}
+              onClick={() => handleCardClick(mascota.nombre)}
             >
               <CardMedia
                 component="img"
                 height="500"
                 image={mascota.image}
-                alt={mascota.name}
-                loading="lazy" // Habilita carga perezosa
+                alt={mascota.nombre}
+                loading="lazy"
               />
               <CardContent>
-                <Typography variant="h6">{mascota.name}</Typography>
+                <Typography variant="h6">{mascota.nombre}</Typography>
               </CardContent>
             </Card>
           </Grid>
