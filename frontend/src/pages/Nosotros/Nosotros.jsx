@@ -48,3 +48,23 @@ const Nosotros = () => {
 };
 // Exportar el componente Nosotros como componente por defecto
 export default Nosotros;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//(≖_≖ )
