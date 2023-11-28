@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import PageContainer from "../../components/container/PageContainer";
 import { Box, Typography, Card, CardContent, CardMedia,} from "@mui/material";
-import Mapa from "./components/Mapa";
+
 import gato from './images/gato.png';
 import perro from './images/perro.png';
 import { Link } from 'react-router-dom';
@@ -138,9 +138,7 @@ function Home() {
         
   </Box>
 
-<Box style={{ marginTop: '40px' }}>
-  <Mapa />
-</Box>
+
 </PageContainer>
 
       
